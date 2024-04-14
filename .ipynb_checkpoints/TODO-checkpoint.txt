@@ -1,0 +1,6 @@
+Set up github
+
+Do EDA
+
+Come up with baseline solution
+
