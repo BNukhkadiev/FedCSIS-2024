@@ -2,8 +2,10 @@
 # Preprocessing
 from imblearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.calibration import LinearSVC
 from sklearn.compose import make_column_transformer
 from sklearn.discriminant_analysis import StandardScaler
+from sklearn.feature_selection import SelectFromModel, SelectKBest, VarianceThreshold, f_classif
 from sklearn.impute import SimpleImputer
 
 
@@ -12,7 +14,9 @@ def get_pipline(estimator, data):
     preprocessor = get_column_tranformer(data)
     # pipline building
     return Pipeline(steps=[
+        
         ('preprocessing', preprocessor),
+        ('feature_selection', SelectKBest(f_classif, k=2)),
         ('classification', estimator)
     ])
 
